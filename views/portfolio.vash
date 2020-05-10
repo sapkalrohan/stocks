@@ -1,0 +1,22 @@
+@html.extend('layout', function(model) {
+  @html.block('content', function(model) {
+
+    @if(model.assets && model.assets.length){
+    <h1>@(model.user)'s Portfolio</h1>
+
+      @model.assets.forEach(x=>{
+      <div id="@x.stock.symbol">@x.stock.symbol : @x.quantity @@ $<span class="value">@(x.stock.value)</span> each , totalvalue = $<span class="tvalue">@x.totalvalue</span></div>
+      })
+    }else{
+      <div><span id="err">Empty Portfolio</span></div>
+    }
+    <div><input type="button" value="logout" onclick="javascript:logout();"/></div>
+  })
+  @html.block('scripts',function(model){
+    <script>
+    var userid = "@(model.userid)";
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" defer></script>
+    <script src="/javascripts/portfolio.js" defer></script>
+  })
+})

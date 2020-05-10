@@ -1,0 +1,11 @@
+@html.extend('layout', function(model) {
+  @html.block('content', function(model) {
+      <div>username:<input type="text" name="username"/></div>
+      <div>password:<input type="password" name="password"/></div>
+      <div><input type="button" value="login" onclick="javascript:login();"/></div>
+      <div><span id="err"></span></div>
+  })
+  @html.block('scripts',function(model){
+    <script src="/javascripts/login.js" defer></script>
+  })
+})

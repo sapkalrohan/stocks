@@ -1,0 +1,28 @@
+body {
+  padding: 50px;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+#err,
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+div {
+  padding: 10px 0px 10px 5px;
+}
+
+@keyframes highlight {
+  0% {
+    background: #ffff99;
+  }
+  100% {
+    background: none;
+  }
+}
+
+.highlight {
+  animation: highlight 2s;
+}
