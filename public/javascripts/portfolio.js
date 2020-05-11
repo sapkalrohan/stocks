@@ -35,5 +35,6 @@ function extendcookie() {
 
 function logout() {
   $.cookie('token', null, { path: '/' })
+  window.token = null
   location.href = '/'
 }
