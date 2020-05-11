@@ -6,12 +6,22 @@ maintain pool of connected sockets in connectedUsers
      ...
     }
 */
+const jwt = require('jsonwebtoken')
+let config = require('./bin/config')
+
 var connectedUsers = {}
 
 function configureSockets(io) {
   io.on('connection', socket => {
     //add to socket pool
-    socket.on('register', function(userid) {
+    socket.on('register', function(token) {
+      let userid
+      try {
+        let payload = jwt.verify(token, config.jwtKey)
+        userid = payload.user
+      } catch (e) {
+        return socket.disconnect(true)
+      }
       socket.userid = userid
       let establishedSockets = connectedUsers[userid]
       if (establishedSockets) {

@@ -2,7 +2,7 @@ ready(() => {
   window.token = $.cookie('token')
   setCookieSelfDestruct()
   var socket = io()
-  socket.emit('register', userid)
+  socket.emit('register', window.token)
   socket.on('asset', function(asset) {
     console.log(asset)
     var maindiv = $('#' + asset.symbol)

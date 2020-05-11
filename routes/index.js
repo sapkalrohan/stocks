@@ -2,15 +2,15 @@ let express = require('express')
 const jwt = require('jsonwebtoken')
 let User = require('../models/User')
 let Asset = require('../models/Asset')
+let config = require('../bin/config')
 let router = express.Router()
-const jwtKey = 'my_secret_key'
 
 /* login page */
 router.get('/', function(req, res, next) {
   if (req.cookies['token']) {
     let payload = req.cookies['token']
     try {
-      payload = jwt.verify(payload, jwtKey)
+      payload = jwt.verify(payload, config.jwtKey)
     } catch (e) {
       res.clearCookie('token')
       return res.redirect('/')
@@ -25,7 +25,7 @@ router.use('/portfolio', function(req, res, next) {
   let payload = req.cookies['token']
   if (payload) {
     try {
-      payload = jwt.verify(payload, jwtKey)
+      payload = jwt.verify(payload, config.jwtKey)
     } catch (e) {
       res.clearCookie('token')
       return res.redirect('/')
@@ -66,7 +66,7 @@ router.post('/login', function(req, res, next) {
       if (error || !user) {
         return res.status(401).json({ err: 'Wrong username   or password.' })
       } else {
-        const token = jwt.sign({ user: user._id }, jwtKey, {
+        const token = jwt.sign({ user: user._id }, config.jwtKey, {
           algorithm: 'HS256',
           expiresIn: 86400
         })
