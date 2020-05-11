@@ -22,13 +22,15 @@ function highlight(ele) {
 
 function setCookieSelfDestruct() {
   window.onbeforeunload = function() {
+    window.stopextendingcookie = true
     var date = new Date()
     date.setTime(date.getTime() + 60 * 1000)
     $.cookie('token', window.token, { expires: date })
   }
 }
 function extendcookie() {
-  $.cookie('token', window.token, { expires: 2147483647 })
+  if (window.stopextendingcookie != true)
+    $.cookie('token', window.token, { expires: 2147483647 })
 }
 
 function logout() {
