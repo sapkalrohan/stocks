@@ -21,7 +21,7 @@ function highlight(ele) {
 }
 
 function setCookieSelfDestruct() {
-  window.onbeforeunload = function() {
+  window.onunload = window.onbeforeunload = function() {
     window.stopextendingcookie = true
     var date = new Date()
     date.setTime(date.getTime() + 60 * 1000)

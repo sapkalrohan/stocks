@@ -17,6 +17,6 @@
     var userid = "@(model.userid)";
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" defer></script>
-    <script src="/javascripts/portfolio.js" defer></script>
+    <script src="/javascripts/portfolio.js?v4" defer></script>
   })
 })
